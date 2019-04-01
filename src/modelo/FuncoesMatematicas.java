@@ -11,6 +11,10 @@ package modelo;
  */
 public class FuncoesMatematicas {
     
+    private String[] convertDates(String param) {
+        return param.split(",");
+    }
+    
     public boolean isEquilateralTriangle(String param) {
         String[] dates = convertDates(param);
         float ladoA = Float.valueOf(dates[0]);
@@ -42,7 +46,38 @@ public class FuncoesMatematicas {
                ladoC != ladoA;
     }
     
-    private String[] convertDates(String param) {
-        return param.split(",");
+    public float[] calcularGastoTotalDaViagem(String viagem) {
+        String[] vetor                   = convertDates(viagem);
+        float[]  gastos                  = new float[5];
+        float    quilometrosIraPercorrer = Float.valueOf(vetor[0]);
+        float    quilometrosCarroFaz     = Float.valueOf(vetor[1]);
+        float    precoCombustivel        = Float.valueOf(vetor[2]);
+        float    valorTotalDePedagio     = Float.valueOf(vetor[3]);
+        
+        gastos[0] = quilometrosIraPercorrer;
+        gastos[1] = quilometrosCarroFaz;
+        gastos[2] = precoCombustivel;
+        gastos[3] = valorTotalDePedagio;
+        gastos[4] = quilometrosIraPercorrer / quilometrosCarroFaz * precoCombustivel + valorTotalDePedagio;
+        
+        return gastos;
     }
+    
+    public String calcularIMC(String imc) {
+        String[] vetor = convertDates(imc);
+        float altura = Float.valueOf(vetor[0]);
+        float peso   = Float.valueOf(vetor[1]);
+        float valor_imc = peso / (altura * altura);
+        
+        if (valor_imc < 20.0) {
+            return "abaixo do peso";
+        } else if (valor_imc >= 20 && valor_imc <= 24) {
+            return "saudável";
+        } else if (valor_imc >= 25 && valor_imc <= 29) {
+            return "acima do peso";
+        } else {
+            return "obeso";
+        }
+    }
+    
 }
