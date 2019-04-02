@@ -24,7 +24,7 @@ public class FuncoesMatematicas {
         return ladoA == ladoB && ladoB == ladoC;
     }
     
-    public boolean isIsoscelesTriangle(String param) {
+    public boolean calcularTrianguloIsosceles(String param) {
         String[] dates = convertDates(param);
         float ladoA = Float.valueOf(dates[0]);
         float ladoB = Float.valueOf(dates[1]);
