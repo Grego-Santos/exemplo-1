@@ -23,30 +23,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         initComponents();
     }
 
-    private void setResultTrue() {
+    private void setResultadoVerdadeiro() {
         jLabelResultado.setText("Sim");
     }
 
-    private void setResultFalse() {
+    private void setResultadoFalso() {
         jLabelResultado.setText("Não");
-    }
-    
-    private String transformaParaStringValorTriangulo() {
-        return Float.parseFloat(jtfLadoA.getText()) + "," +
-               Float.parseFloat(jtfLadoB.getText()) + "," +
-               Float.parseFloat(jtfLadoC.getText());
-    }
-    
-    private String convertValueFieldToViagem() throws NumberFormatException {
-        return Float.parseFloat(quilometrosPercorrer.getText()) + "," +
-               Float.parseFloat(quilometrosLitro.getText()) + "," +
-               Float.parseFloat(valorCombustivel.getText()) + "," +
-               Float.parseFloat(valorPedagio.getText());
-    }
-    
-    private String convertValueFieldToIMC() throws NumberFormatException {
-        return Float.parseFloat(altura.getText()) + "," +
-               Float.parseFloat(peso.getText());
     }
     
     /**
@@ -419,42 +401,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jbtnIsoscelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIsoscelesActionPerformed
         // TODO add your handling code here:
-        if (math.calcularTrianguloIsosceles(transformaParaStringValorTriangulo())) {
-            setResultTrue();
-            System.out.println("tem dois lados iguais");
+        if (math.calculaTrianguloIsosceles(jtfLadoA.getText() + "," + jtfLadoB.getText() + "," +jtfLadoC.getText())) {
+            setResultadoVerdadeiro();
         } else {
-            setResultFalse();
-            System.out.println("não tem dois lados iguais");
+            setResultadoFalso();
         }
     }//GEN-LAST:event_jbtnIsoscelesActionPerformed
 
     private void jbtnEquilateroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEquilateroActionPerformed
         // TODO add your handling code here:
-        try {
-            if (math.isEquilateralTriangle(transformaParaStringValorTriangulo())) {
-                setResultTrue();
-                System.out.println("tem tres lados iguais");
-            } else {
-                setResultFalse();
-                System.out.println("não tem tres lados iguais");
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Deve ser inserido apenas números válidos!");
+        if (math.calculaTrianguloEquilatero(jtfLadoA.getText() + "," + jtfLadoB.getText() + "," +jtfLadoC.getText())) {
+            setResultadoVerdadeiro();
+        } else {
+            setResultadoFalso();
         }
     }//GEN-LAST:event_jbtnEquilateroActionPerformed
 
     private void jbtnEscalenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEscalenoActionPerformed
         // TODO add your handling code here:
-        try {
-            if (math.isScaleneTriangle(transformaParaStringValorTriangulo())) {
-                setResultTrue();
-                System.out.println("tem tres lados diferentes");
-            } else {
-                setResultFalse();
-                System.out.println("não tem tres lados diferentes");
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Deve ser inserido apenas números válidos!");
+        if (math.calculaTrianguloEscaleno(jtfLadoA.getText() + "," + jtfLadoB.getText() + "," +jtfLadoC.getText())) {
+            setResultadoVerdadeiro();
+        } else {
+            setResultadoFalso();
         }
     }//GEN-LAST:event_jbtnEscalenoActionPerformed
 
@@ -464,30 +432,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        try {
-            float[] resultado = math.calcularGastoTotalDaViagem(convertValueFieldToViagem());
-            
-            jTextArea1.setText("Nesta viagem você vai percorrer " + resultado[0] + " quilometros\n"+
-                               "Seu carro faz " + resultado[1] + " quilometro(s) por litro\n" +
-                               "O valor do litro de combustível está cotado em R$" + resultado[2] + "\n" +
-                               "Você irá gastar R$" + resultado[3] + " de pedágio\n" +
-                               "Seu gasto total será de: R$" + resultado[4]
-            );
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Deve ser inserido apenas números válidos!");
-        }
+        float[] resultado = math.calcularGastoTotalDaViagem(quilometrosPercorrer.getText() + "," + quilometrosLitro.getText() + "," + valorCombustivel.getText() + "," + valorPedagio.getText());
+
+        jTextArea1.setText("Nesta viagem você vai percorrer " + resultado[0] + " quilometros\n"+
+                           "Seu carro faz " + resultado[1] + " quilometro(s) por litro\n" +
+                           "O valor do litro de combustível está cotado em R$" + resultado[2] + "\n" +
+                           "Você irá gastar R$" + resultado[3] + " de pedágio\n" +
+                           "Seu gasto total será de: R$" + resultado[4]
+        );
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        try {
-            String resultado = math.calcularIMC(convertValueFieldToIMC());
-            
-            jTextArea2.setText("Você está " + resultado + "!");
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Deve ser inserido apenas números válidos!");
-        }
+        String resultado = math.calcularIMC(altura.getText() + "," + peso.getText());
+        
+        jTextArea2.setText("Você está " + resultado + "!");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jtfLadoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfLadoAActionPerformed

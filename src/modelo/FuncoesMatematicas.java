@@ -11,12 +11,12 @@ package modelo;
  */
 public class FuncoesMatematicas {
     
-    private String[] convertDates(String param) {
+    private String[] converte(String param) {
         return param.split(",");
     }
     
-    public boolean isEquilateralTriangle(String param) {
-        String[] dates = convertDates(param);
+    public boolean calculaTrianguloEquilatero(String param) {
+        String[] dates = converte(param);
         float ladoA = Float.valueOf(dates[0]);
         float ladoB = Float.valueOf(dates[1]);
         float ladoC = Float.valueOf(dates[2]);
@@ -24,8 +24,8 @@ public class FuncoesMatematicas {
         return ladoA == ladoB && ladoB == ladoC;
     }
     
-    public boolean calcularTrianguloIsosceles(String param) {
-        String[] dates = convertDates(param);
+    public boolean calculaTrianguloIsosceles(String param) {
+        String[] dates = converte(param);
         float ladoA = Float.valueOf(dates[0]);
         float ladoB = Float.valueOf(dates[1]);
         float ladoC = Float.valueOf(dates[2]);
@@ -35,8 +35,8 @@ public class FuncoesMatematicas {
             || ladoB == ladoC && ladoB != ladoA;
     }
     
-    public boolean isScaleneTriangle(String param) {
-        String[] dates = convertDates(param);
+    public boolean calculaTrianguloEscaleno(String param) {
+        String[] dates = converte(param);
         float ladoA = Float.valueOf(dates[0]);
         float ladoB = Float.valueOf(dates[1]);
         float ladoC = Float.valueOf(dates[2]);
@@ -47,7 +47,7 @@ public class FuncoesMatematicas {
     }
     
     public float[] calcularGastoTotalDaViagem(String viagem) {
-        String[] vetor                   = convertDates(viagem);
+        String[] vetor                   = converte(viagem);
         float[]  gastos                  = new float[5];
         float    quilometrosIraPercorrer = Float.valueOf(vetor[0]);
         float    quilometrosCarroFaz     = Float.valueOf(vetor[1]);
@@ -64,7 +64,7 @@ public class FuncoesMatematicas {
     }
     
     public String calcularIMC(String imc) {
-        String[] vetor = convertDates(imc);
+        String[] vetor = converte(imc);
         float altura = Float.valueOf(vetor[0]);
         float peso   = Float.valueOf(vetor[1]);
         float valor_imc = peso / (altura * altura);
